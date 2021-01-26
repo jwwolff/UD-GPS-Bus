@@ -71,10 +71,22 @@ ser.write((Command_Test_AT+'\r\n').encode())
 
 ############################################################################
 ############################################################################
-# Creates while loop that will iterate through program continuosly 
+#should initialize the GPS Hat
 power_key = 6
-power_on(power_key)
+if ser != None:
+        ser.close()
+        GPIO.cleanup()
+try:
+    power_on(power_key)
+    get_gps_position()
+    power_down(power_key)
+except:
+    if ser != None:
+        ser.close()
+    power_down(power_key)
+    GPIO.cleanup()
 
+# Creates while loop that will iterate through program continuosly 
 while True:
     
     # Stops from overloading code from terminal window 
@@ -129,7 +141,9 @@ while True:
         with open(dir + 'Test1.csv','a+',newline='') as file: 
             writer = csv.writer(file)
             writer.writerow([lat , long])
-
+if ser != None:
+        ser.close()
+        GPIO.cleanup()
         
     
     
