@@ -71,7 +71,7 @@ ser.write((Command_Test_AT+'\r\n').encode())
 
 ############################################################################
 ############################################################################
-# Creates while loop that will iterate through progame continuosly 
+# Creates while loop that will iterate through program continuosly 
 power_key = 6
 power_on(power_key)
 
