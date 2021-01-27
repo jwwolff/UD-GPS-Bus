@@ -15,7 +15,10 @@ entries = []
 date = datetime.date.today()
 t = date.strftime("%m-%d-%y")
 
-fields = (['Getting on', 'Getting Off', 'Left at Stop', 'Bus Stop'])
+BusStops = ["Terminal Stop","Python Stop","Console Stop"]
+
+
+fields = ['Getting on', 'Getting Off', 'Left at Stop', 'Bus Stop']
 ans = []
 my_file = path.exists("Data " + t + '.csv')
 
@@ -30,7 +33,7 @@ if my_file == False:
 def fetch(entries):
     with open(("Data " + t + '.csv'),'a+',newline='') as file: 
         writer = csv.writer(file)
-        writer.writerow([t,entryData[0],entryData[1],entryData[2],entryData[3]])
+        writer.writerow([t,entryData[0],entryData[1],entryData[2],entries[3][1].get()])
         entryData[0],entryData[1],entryData[2],entryData[3] = [0,0,0,0]
         entries[0][1].config(text = entryData[0])
         entries[1][1].config(text = entryData[1])
@@ -51,9 +54,6 @@ def fetch(entries):
 #         ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
 #         entries.append((field, ent))
 #     return entries
-
-# Variables for temporary storage
-
 
 # increment function for the buttons: simply adds 1 and updates the label
 def increment(i):
@@ -76,9 +76,11 @@ def makeform(root, fields):
     i = 0
     for field in fields:
         if field == "Bus Stop":
-            lab = tk.Label(row1, width = 30, text=field,padx=5,pady=5)
-            ent = tk.Entry(row1)
-            entries.append((field,ent))
+            lab = tk.Label(row1, width = 10, text=field,padx=5,pady=5)
+            BusStopVar = tk.StringVar()
+            BusStopVar.set(BusStops[0])
+            ent = tk.OptionMenu(row1,BusStopVar,*BusStops)
+            entries.append((field,BusStopVar))
             lab.pack(side=tk.LEFT)
             ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
         else:
