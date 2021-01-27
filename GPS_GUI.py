@@ -15,7 +15,7 @@ entries = []
 date = datetime.date.today()
 t = date.strftime("%m-%d-%y")
 
-fields = (['Getting on', 'Getting Off', 'Left Behind', 'Bus Stop'])
+fields = (['Getting on', 'Getting Off', 'Left at Stop', 'Bus Stop'])
 ans = []
 my_file = path.exists("Data " + t + '.csv')
 
