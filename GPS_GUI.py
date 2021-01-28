@@ -7,16 +7,33 @@ import tkinter as tk
 import csv
 import datetime
 from os import path 
+import configparser
 
 ############################################################################
 ############################################################################
+
 entryData = [0]*4
 entries = []
 date = datetime.date.today()
 t = date.strftime("%m-%d-%y")
 
-BusStops = ["Terminal Stop","Python Stop","Console Stop"]
+############################################################################
+############################################################################
 
+#Config File Setup
+config = configparser.ConfigParser()
+##BusStops = ["Terminal Stop","Python Stop","Console Stop"]
+if path.exists("config.ini") == False:
+    config["Basic Settings"] = {
+        "BusStops": "Terminal Stop\nPython Stop\nConsole Stop"
+        }
+    with open('config.ini', 'w') as conf:
+        config.write(conf)
+config.read("config.ini")
+BusStops = config.get("Basic Settings","BusStops").split("\n")
+
+############################################################################
+############################################################################
 
 fields = ['Getting on', 'Getting Off', 'Left at Stop', 'Bus Stop']
 ans = []
@@ -33,7 +50,7 @@ if my_file == False:
 def fetch(entries):
     with open(("Data " + t + '.csv'),'a+',newline='') as file: 
         writer = csv.writer(file)
-        writer.writerow([t,entryData[0],entryData[1],entryData[2],entries[3][1].get()])
+        writer.writerow([date,entryData[0],entryData[1],entryData[2],entries[3][1].get()])
         entryData[0],entryData[1],entryData[2],entryData[3] = [0,0,0,0]
         entries[0][1].config(text = entryData[0])
         entries[1][1].config(text = entryData[1])
@@ -42,18 +59,6 @@ def fetch(entries):
 
 ############################################################################
 ############################################################################
-
-# def makeform(root, fields):
-#     entries = []
-#     for field in fields:
-#         row = tk.Frame(root)
-#         lab = tk.Label(row, width=30, text=field, anchor='w')
-#         ent = tk.Entry(row)
-#         row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
-#         lab.pack(side=tk.LEFT)
-#         ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
-#         entries.append((field, ent))
-#     return entries
 
 # increment function for the buttons: simply adds 1 and updates the label
 def increment(i):
