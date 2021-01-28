@@ -12,7 +12,7 @@ import configparser
 ############################################################################
 ############################################################################
 
-entryData = [0]*4
+entryData = [0]*5
 entries = []
 date = datetime.date.today()
 t = date.strftime("%m-%d-%y")
@@ -66,15 +66,31 @@ def fetch(entries):
 
 # increment function for the buttons: simply adds 1 and updates the label
 def increment(i):
+    if i == 0:
+        PassMod = 1
+    elif i == 1:
+        PassMod = -1
+    else:
+        PassMod = 0
     entryData[i] = entryData[i]+1
+    entryData[4] = entryData[4]+1*PassMod
     entries[i][1].config(text = entryData[i])
+    entries[4][1].config(text = "Psngr#: "+str(entryData[4]))
+    
 
 # decrement function for the buttons: Simply subtracts 1 and updates the label
 def decrement(i):
-    entryData[i] = entryData[i]-1
-    if entryData[i] < 0:
-         entryData[i] = 0
+    if i == 0:
+        PassMod = 1
+    elif i == 1:
+        PassMod = -1
+    else:
+        PassMod = 0
+    if entryData[i] != 0:
+        entryData[i] = entryData[i]-1
+        entryData[4] = entryData[4]-1*PassMod
     entries[i][1].config(text = entryData[i])
+    entries[4][1].config(text = "Psngr#: "+str(entryData[4]))
 
 # formats the main screen and sets up the GUI
 def makeform(root, fields):
@@ -83,6 +99,8 @@ def makeform(root, fields):
     row1.pack()
     row2.pack(expand=tk.YES,fill=tk.BOTH)
     i = 0
+    PassLabel = tk.Label(row1,text="Psngr#: 0",padx=5,pady=5)
+    PassLabel.pack(side=tk.LEFT)
     for field in fields:
         #Creates the Bus Stop dropdown menu
         if field == "Bus Stop":
@@ -107,6 +125,7 @@ def makeform(root, fields):
             ent.pack(expand=tk.YES,fill=tk.BOTH,padx=6,pady=4)
             button2.pack(expand=tk.YES,fill=tk.BOTH)
         i = i+1
+    entries.append(("Passengers",PassLabel))
     return entries
 
 
