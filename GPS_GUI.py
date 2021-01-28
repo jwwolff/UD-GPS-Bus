@@ -22,15 +22,17 @@ t = date.strftime("%m-%d-%y")
 
 #Config File Setup
 config = configparser.ConfigParser()
-##BusStops = ["Terminal Stop","Python Stop","Console Stop"]
+#detects if a config file exists and creates one if it doesn't
 if path.exists("config.ini") == False:
     config["Basic Settings"] = {
-        "BusStops": "Terminal Stop\nPython Stop\nConsole Stop"
+        "#Names of the Bus stops with line brakes to seperate each stop\n"
+        "Bus-Stops": "Terminal Stop\nPython Stop\nConsole Stop"
         }
     with open('config.ini', 'w') as conf:
         config.write(conf)
+#reads the config and processes variables
 config.read("config.ini")
-BusStops = config.get("Basic Settings","BusStops").split("\n")
+BusStops = config.get("Basic Settings","Bus-Stops").split("\n")
 
 ############################################################################
 ############################################################################
@@ -39,6 +41,7 @@ fields = ['Getting on', 'Getting Off', 'Left at Stop', 'Bus Stop']
 ans = []
 my_file = path.exists("Data " + t + '.csv')
 
+#Checks if a CSV file has been made for the day
 if my_file == False:
     with open(("Data " + t + '.csv'),'a+',newline='') as file: 
         writer = csv.writer(file)
@@ -47,6 +50,7 @@ if my_file == False:
 ############################################################################
 ############################################################################
 
+#Writes a new row to the CSV file
 def fetch(entries):
     with open(("Data " + t + '.csv'),'a+',newline='') as file: 
         writer = csv.writer(file)
@@ -80,6 +84,7 @@ def makeform(root, fields):
     row2.pack(expand=tk.YES,fill=tk.BOTH)
     i = 0
     for field in fields:
+        #Creates the Bus Stop dropdown menu
         if field == "Bus Stop":
             lab = tk.Label(row1, width = 10, text=field,padx=5,pady=5)
             BusStopVar = tk.StringVar()
@@ -88,6 +93,7 @@ def makeform(root, fields):
             entries.append((field,BusStopVar))
             lab.pack(side=tk.LEFT)
             ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
+        #Creates the buttons for increasing a decreasing values
         else:
             col = tk.Frame(row2)
             lab = tk.Label(col, width = 10, text=field,padx=5,pady=5)
@@ -104,7 +110,7 @@ def makeform(root, fields):
     return entries
 
 
-
+#code to the starts the GUI
 if __name__ == '__main__':
     root = tk.Tk()
     row3 = tk.Frame(root)
