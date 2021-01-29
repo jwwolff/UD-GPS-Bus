@@ -28,14 +28,16 @@ if path.exists("config.ini") == False:
     config["Basic Settings"] = {
         "#Names of the Bus stops with line brakes to seperate each stop\n"
         "Bus-Stops": "Terminal Stop\nPython Stop\nConsole Stop",
-        "Fullscreen": "True"
+        "Fullscreen": "True",
+        "#Maximum Capacity of the bus\n"
+        "Max-Capacity": "7"
         }
     with open('config.ini', 'w') as conf:
         config.write(conf)
 #reads the config and processes variables
 config.read("config.ini")
 BusStops = config.get("Basic Settings","Bus-Stops").split("\n")
-
+BusCap = config.get("Basic Settings","Max-Capacity")
 ############################################################################
 ############################################################################
 
@@ -77,7 +79,10 @@ def increment(i):
     entryData[i] = entryData[i]+1
     entryData[4] = entryData[4]+1*PassMod
     entries[i][1].config(text = entryData[i])
-    entries[4][1].config(text = "Psngr#: "+str(entryData[4]))
+    if(entryData[4] > int(BusCap)):
+        entries[4][1].config(text = "Current Passengers: "+str(entryData[4])+" !Warning: Over Capacity!",fg="red")
+    else:
+        entries[4][1].config(text = "Current Passengers: "+str(entryData[4]),fg="white")
     
 
 # decrement function for the buttons: Simply subtracts 1 and updates the label
@@ -92,7 +97,10 @@ def decrement(i):
         entryData[i] = entryData[i]-1
         entryData[4] = entryData[4]-1*PassMod
     entries[i][1].config(text = entryData[i])
-    entries[4][1].config(text = "Psngr#: "+str(entryData[4]))
+    if(entryData[4] > int(BusCap)):
+        entries[4][1].config(text = "Current Passengers: "+str(entryData[4])+" !Warning: Over Capacity!",fg="red")
+    else:
+        entries[4][1].config(text = "Current Passengers: "+str(entryData[4]),fg="white")
 
 # formats the main screen and sets up the GUI
 def makeform(root, fields):
@@ -101,7 +109,7 @@ def makeform(root, fields):
     row1.pack(expand=tk.YES,fill=tk.X,side=tk.TOP)
     row2.pack(expand=tk.YES,fill=tk.BOTH,side=tk.TOP)
     i = 0
-    PassLabel = tk.Label(row1,text="Psngr#: 0",padx=5,pady=5)
+    PassLabel = tk.Label(row1,text="Current Passengers: 0",padx=5,pady=5)
     PassLabel.pack(side=tk.LEFT)
     for field in fields:
         #Creates the Bus Stop dropdown menu
