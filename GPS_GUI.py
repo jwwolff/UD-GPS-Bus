@@ -8,6 +8,7 @@ import csv
 import datetime
 from os import path 
 import configparser
+from sys import platform
 
 ############################################################################
 ############################################################################
@@ -96,8 +97,8 @@ def decrement(i):
 def makeform(root, fields):
     row1 = tk.Frame(root)
     row2 = tk.Frame(root)
-    row1.pack()
-    row2.pack(expand=tk.YES,fill=tk.BOTH)
+    row1.pack(expand=tk.YES,fill=tk.X,side=tk.TOP)
+    row2.pack(expand=tk.YES,fill=tk.BOTH,side=tk.TOP)
     i = 0
     PassLabel = tk.Label(row1,text="Psngr#: 0",padx=5,pady=5)
     PassLabel.pack(side=tk.LEFT)
@@ -109,8 +110,8 @@ def makeform(root, fields):
             BusStopVar.set(BusStops[0])
             ent = tk.OptionMenu(row1,BusStopVar,*BusStops)
             entries.append((field,BusStopVar))
-            lab.pack(side=tk.LEFT)
-            ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
+            lab.pack(side=tk.LEFT,expand=tk.YES,fill=tk.X)
+            ent.pack(side=tk.RIGHT)
         #Creates the buttons for increasing a decreasing values
         else:
             col = tk.Frame(row2)
@@ -120,7 +121,7 @@ def makeform(root, fields):
             button1 = tk.Button(col,text="+",font=("Arial",30),command=lambda idx = i: increment(idx))
             button2 = tk.Button(col,text="-",font=("Arial",30),command=lambda idx = i: decrement(idx))
             col.pack(side=tk.LEFT,expand=tk.YES,fill=tk.BOTH)
-            lab.pack()
+            lab.pack(side=tk.TOP)
             button1.pack(expand=tk.YES,fill=tk.BOTH)
             ent.pack(expand=tk.YES,fill=tk.BOTH,padx=6,pady=4)
             button2.pack(expand=tk.YES,fill=tk.BOTH)
@@ -140,4 +141,5 @@ if __name__ == '__main__':
     b1.pack(side=tk.LEFT, padx=5, pady=5)
     b2 = tk.Button(row3, text='Quit', command=root.quit)
     b2.pack(side=tk.LEFT, padx=5, pady=5)
+    root.attributes('-fullscreen',True)
     root.mainloop()
