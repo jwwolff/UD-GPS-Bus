@@ -27,7 +27,8 @@ config = configparser.ConfigParser()
 if path.exists("config.ini") == False:
     config["Basic Settings"] = {
         "#Names of the Bus stops with line brakes to seperate each stop\n"
-        "Bus-Stops": "Terminal Stop\nPython Stop\nConsole Stop"
+        "Bus-Stops": "Terminal Stop\nPython Stop\nConsole Stop",
+        "Fullscreen": "True"
         }
     with open('config.ini', 'w') as conf:
         config.write(conf)
@@ -141,5 +142,6 @@ if __name__ == '__main__':
     b1.pack(side=tk.LEFT, padx=5, pady=5)
     b2 = tk.Button(row3, text='Quit', command=root.quit)
     b2.pack(side=tk.LEFT, padx=5, pady=5)
-    root.attributes('-fullscreen',True)
+    if config["Basic Settings"].getboolean("Fullscreen"):
+        root.attributes('-fullscreen',True)
     root.mainloop()
