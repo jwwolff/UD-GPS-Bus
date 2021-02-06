@@ -82,7 +82,7 @@ def increment(i):
     if(entryData[4] > int(BusCap)):
         entries[4][1].config(text = "Current Passengers: "+str(entryData[4])+" !Warning: Over Capacity!",fg="red")
     else:
-        entries[4][1].config(text = "Current Passengers: "+str(entryData[4]),fg="white")
+        entries[4][1].config(text = "Current Passengers: "+str(entryData[4]),fg="black")
     
 
 # decrement function for the buttons: Simply subtracts 1 and updates the label
@@ -100,7 +100,7 @@ def decrement(i):
     if(entryData[4] > int(BusCap)):
         entries[4][1].config(text = "Current Passengers: "+str(entryData[4])+" !Warning: Over Capacity!",fg="red")
     else:
-        entries[4][1].config(text = "Current Passengers: "+str(entryData[4]),fg="white")
+        entries[4][1].config(text = "Current Passengers: "+str(entryData[4]),fg="black")
 
 # formats the main screen and sets up the GUI
 def makeform(root, fields):
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     root.bind('<Return>', (lambda event, e=ents: fetch(e)))   
     b1 = tk.Button(row3, text='Save', command=(lambda e=ents: fetch(e)))
     b1.pack(side=tk.LEFT, padx=5, pady=5)
-    b2 = tk.Button(row3, text='Quit', command=root.quit)
+    b2 = tk.Button(row3, text='Quit', command=root.destroy)
     b2.pack(side=tk.LEFT, padx=5, pady=5)
     if config["Basic Settings"].getboolean("Fullscreen"):
         root.attributes('-fullscreen',True)
