@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # This Python program will run the GUI interface needed to collect data by the bus driver
 # will then write data to CSV file where it will be sent to email at end of work day
 # this was created by UD-GPS team. All rights resevered University Of Dayton, 11/5/2020
