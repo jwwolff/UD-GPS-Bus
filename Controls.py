@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import serial
 import csv
 import time
+import mariadb 
 
 ser = serial.Serial('/dev/ttyS0',115200)
 ser.flush()
@@ -79,3 +80,67 @@ def conversion(line):
 
 
 
+
+
+user="UDBus"
+password="UDBus"
+host="localhost"
+database="udbus"
+
+
+#methods for use in code
+def DBInsertBuses(BusID,BusName):
+    conn = mariadb.connect(
+        user=user,
+        password=password,
+        host=host,
+        database=database)
+    cur = conn.cursor() 
+    try: 
+        cur.execute("INSERT INTO buses (BusID,BusName) VALUES (?, ?)", (BusID,BusName)) 
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
+    conn.commit() 
+    conn.close()
+
+def DBInsertBusstopdata(BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date):
+    conn = mariadb.connect(
+        user=user,
+        password=password,
+        host=host,
+        database=database)
+    cur = conn.cursor() 
+    try: 
+        cur.execute("INSERT INTO busstopdata (BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date) VALUES (?, ?,?,?,?,?)", (BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date)) 
+    except mariadb.Error as e: 
+        print(f"Error: {e}") 
+    conn.commit() 
+    conn.close()  
+
+def DBInsertBusstops(BusStopID,BusStopName):
+    conn = mariadb.connect(
+        user=user,
+        password=password,
+        host=host,
+        database=database)
+    cur = conn.cursor() 
+    try: 
+        cur.execute("INSERT INTO busstops (BusStopID,BusStopName) VALUES (?, ?)", (BusStopID,BusStopName)) 
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
+    conn.commit() 
+    conn.close()
+
+def DBInsertgpsdata(TimeStamp,BusID,Latitude,Longitude):
+    conn = mariadb.connect(
+        user=user,
+        password=password,
+        host=host,
+        database=database)
+    cur = conn.cursor() 
+    try: 
+        cur.execute("INSERT INTO gpsdata (TimeStamp,BusID,Latitude,Longitude) VALUES (?, ?,?,?)", (TimeStamp,BusID,Latitude,Longitude)) 
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
+    conn.commit() 
+    conn.close()
