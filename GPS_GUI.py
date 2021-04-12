@@ -30,7 +30,10 @@ if path.exists("config.ini") == False:
         "Bus-Stops": "Terminal Stop\nPython Stop\nConsole Stop",
         "Fullscreen": "True",
         "#Maximum Capacity of the bus\n"
-        "Max-Capacity": "7"
+        "Max-Capacity": "7",
+        "DBHost":"localhost",
+        "DBusername":"root",
+        "DBpassword":"UDBus"
         }
     with open('config.ini', 'w') as conf:
         config.write(conf)
