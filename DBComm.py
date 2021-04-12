@@ -1,13 +1,19 @@
-#!/usr/bin/python 
+#!/usr/bin/python3 
 import mariadb 
+
+user="UDBus"
+password="UDBus"
+host="localhost"
+database="udbus"
+
 
 #methods for use in code
 def DBInsertBuses(BusID,BusName):
     conn = mariadb.connect(
-        user="UDBus",
-        password="UDBus",
-        host="localhost",
-        database="udbus")
+        user=user,
+        password=password,
+        host=host,
+        database=database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO buses (BusID,BusName) VALUES (?, ?)", (BusID,BusName)) 
@@ -18,10 +24,10 @@ def DBInsertBuses(BusID,BusName):
 
 def DBInsertBusstopdata(BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date):
     conn = mariadb.connect(
-        user="UDBus",
-        password="UDBus",
-        host="localhost",
-        database="udbus")
+        user=user,
+        password=password,
+        host=host,
+        database=database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO busstopdata (BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date) VALUES (?, ?,?,?,?,?)", (BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date)) 
@@ -32,10 +38,10 @@ def DBInsertBusstopdata(BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date):
 
 def DBInsertBusstops(BusStopID,BusStopName):
     conn = mariadb.connect(
-        user="UDBus",
-        password="UDBus",
-        host="localhost",
-        database="udbus")
+        user=user,
+        password=password,
+        host=host,
+        database=database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO busstops (BusStopID,BusStopName) VALUES (?, ?)", (BusStopID,BusStopName)) 
@@ -46,10 +52,10 @@ def DBInsertBusstops(BusStopID,BusStopName):
 
 def DBInsertgpsdata(TimeStamp,BusID,Latitude,Longitude):
     conn = mariadb.connect(
-        user="UDBus",
-        password="UDBus",
-        host="localhost",
-        database="udbus")
+        user=user,
+        password=password,
+        host=host,
+        database=database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO gpsdata (TimeStamp,BusID,Latitude,Longitude) VALUES (?, ?,?,?)", (TimeStamp,BusID,Latitude,Longitude)) 
