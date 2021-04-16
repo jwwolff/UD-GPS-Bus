@@ -76,7 +76,7 @@ def conversion(line):
                 long= long*-1
                 
             time.sleep(.5)
-            print("lat: " + str(lat) + " long: " + str(long))
+            return [lat,long]
 
 
 
