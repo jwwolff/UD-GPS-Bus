@@ -3,7 +3,7 @@ import mariadb
 
 user="UDBus"
 password="UDBus"
-host="localhost"
+host="64.93.229.203"
 database="udbus"
 
 
