@@ -19,9 +19,10 @@ while True:
     time.sleep(.1)
     gps_data = conversion(line)
     if gps_data is not None:
-        lat = gps_data[0]
-        long = gps_data[1]
-        print(lat,long)
+        Lat = gps_data[0]
+        Long = gps_data[1]
+        DBInsertgpsdata(datetime.date.today(),1,Lat,Long)
+        print(Lat,Long)
     
     
 
