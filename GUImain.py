@@ -9,7 +9,7 @@ import datetime
 from os import path 
 import configparser
 from sys import platform
-from Controls import *
+from DBComm import *
 
 ############################################################################
 ############################################################################
