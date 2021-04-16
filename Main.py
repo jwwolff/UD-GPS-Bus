@@ -1,7 +1,7 @@
 # imports serial and time libraries
-from controls import *
+from Controls import *
 from decimal import *
-from datetime import datetime
+import datetime
 import RPi.GPIO as GPIO
 import serial
 import csv
@@ -18,10 +18,11 @@ while True:
     line = ser.readline().decode('utf-8')
     time.sleep(.1)
     gps_data = conversion(line)
+    t = datetime.date.today()
     if gps_data is not None:
         Lat = gps_data[0]
         Long = gps_data[1]
-        DBInsertgpsdata(datetime.date.today(),1,Lat,Long)
+        DBInsertgpsdata(t,1,Lat,Long)
         print(Lat,Long)
     
     
