@@ -9,10 +9,12 @@ import datetime
 from os import path 
 import configparser
 from sys import platform
+from Controls import *
 
 ############################################################################
 ############################################################################
 
+#some variable setup
 entryData = [0]*5
 entries = []
 date = datetime.date.today()
@@ -33,7 +35,8 @@ if path.exists("config.ini") == False:
         "Max-Capacity": "7",
         "DBHost":"localhost",
         "DBusername":"root",
-        "DBpassword":"UDBus"
+        "DBpassword":"UDBus",
+        "BusID":"1"
         }
     with open('config.ini', 'w') as conf:
         config.write(conf)
@@ -57,8 +60,12 @@ if my_file == False:
 ############################################################################
 ############################################################################
 
-#Writes a new row to the CSV file
+#Writes a new row to the CSV file using data from gathered from GUI
+#entryData is (0) Getting on (1) Getting Off (2) Left at Stop (3) Bus Stop (4) Current Capacity 
 def fetch(entries):
+    #quick code for testing
+    DBInsertBusstopdata(1,1,entryData[0],entryData[1],entryData[2],date)
+
     with open(("Data " + t + '.csv'),'a+',newline='') as file: 
         writer = csv.writer(file)
         writer.writerow([date,entryData[0],entryData[1],entryData[2],entries[3][1].get()])
@@ -122,6 +129,7 @@ def makeform(root, fields):
             BusStopVar.set(BusStops[0])
             ent = tk.OptionMenu(row1,BusStopVar,*BusStops)
             entries.append((field,BusStopVar))
+            #alinement in GUI
             lab.pack(side=tk.LEFT,expand=tk.YES,fill=tk.X)
             ent.pack(side=tk.RIGHT)
         #Creates the buttons for increasing a decreasing values
@@ -132,6 +140,7 @@ def makeform(root, fields):
             entries.append((field,ent))
             button1 = tk.Button(col,text="+",font=("Arial",30),command=lambda idx = i: increment(idx))
             button2 = tk.Button(col,text="-",font=("Arial",30),command=lambda idx = i: decrement(idx))
+            #alinement in GUI
             col.pack(side=tk.LEFT,expand=tk.YES,fill=tk.BOTH)
             lab.pack(side=tk.TOP)
             button1.pack(expand=tk.YES,fill=tk.BOTH)

@@ -87,7 +87,6 @@ password="UDBus"
 host="localhost"
 database="udbus"
 
-
 #methods for use in code
 def DBInsertBuses(BusID,BusName):
     conn = mariadb.connect(
