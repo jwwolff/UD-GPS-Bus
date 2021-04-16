@@ -1,19 +1,16 @@
 #!/usr/bin/python3 
 import mariadb 
+import globals
 
-user="UDBus"
-password="UDBus"
-host="64.93.229.203"
-database="udbus"
 
 
 #methods for use in code
 def DBInsertBuses(BusID,BusName):
     conn = mariadb.connect(
-        user=user,
-        password=password,
-        host=host,
-        database=database)
+        user=globals.user,
+        password=globals.password,
+        host=globals.host,
+        database=globals.database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO buses (BusID,BusName) VALUES (?, ?)", (BusID,BusName)) 
@@ -24,10 +21,10 @@ def DBInsertBuses(BusID,BusName):
 
 def DBInsertBusstopdata(BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date):
     conn = mariadb.connect(
-        user=user,
-        password=password,
-        host=host,
-        database=database)
+        user=globals.user,
+        password=globals.password,
+        host=globals.host,
+        database=globals.database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO busstopdata (BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date) VALUES (?, ?,?,?,?,?)", (BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date)) 
@@ -38,10 +35,10 @@ def DBInsertBusstopdata(BusID,BusStopID,PickedUp,DroppedOff,LeftBehind,Date):
 
 def DBInsertBusstops(BusStopID,BusStopName):
     conn = mariadb.connect(
-        user=user,
-        password=password,
-        host=host,
-        database=database)
+        user=globals.user,
+        password=globals.password,
+        host=globals.host,
+        database=globals.database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO busstops (BusStopID,BusStopName) VALUES (?, ?)", (BusStopID,BusStopName)) 
@@ -52,10 +49,10 @@ def DBInsertBusstops(BusStopID,BusStopName):
 
 def DBInsertgpsdata(TimeStamp,BusID,Latitude,Longitude):
     conn = mariadb.connect(
-        user=user,
-        password=password,
-        host=host,
-        database=database)
+        user=globals.user,
+        password=globals.password,
+        host=globals.host,
+        database=globals.database)
     cur = conn.cursor() 
     try: 
         cur.execute("INSERT INTO gpsdata (TimeStamp,BusID,Latitude,Longitude) VALUES (?, ?,?,?)", (TimeStamp,BusID,Latitude,Longitude)) 
@@ -73,5 +70,3 @@ def DBInsertgpsdata(TimeStamp,BusID,Latitude,Longitude):
 #    print(f"First name: {first_name}, Last name: {last_name}")
     
 #insert information 
-
-
