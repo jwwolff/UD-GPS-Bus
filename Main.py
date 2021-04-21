@@ -1,7 +1,7 @@
 # imports serial and time libraries
-from controls import *
+from Controls import *
 from decimal import *
-from datetime import datetime
+import datetime
 import RPi.GPIO as GPIO
 import serial
 import csv
