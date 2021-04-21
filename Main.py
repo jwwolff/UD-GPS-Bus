@@ -21,7 +21,7 @@ while True:
     if gps_data is not None:
         Lat = gps_data[0]
         Long = gps_data[1]
-        DBInsertgpsdata(datetime.date.today(),1,Lat,Long)
+        DBInsertgpsdata(datetime.datetime.today(),1,Lat,Long)
         print(Lat,Long)
     
     

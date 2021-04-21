@@ -71,7 +71,7 @@ if my_file == False:
 def fetch(entries):
     #quick code for testing
 
-    DBInsertBusstopdata(BusID,1,entryData[0],entryData[1],entryData[2],date)
+    DBInsertBusstopdata(BusID,1,entryData[0],entryData[1],entryData[2],datetime.datetime.today())
 
     with open(("Data " + t + '.csv'),'a+',newline='') as file: 
         writer = csv.writer(file)
