@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 import serial
 import csv
 import time
+import Config
 
 ser = serial.Serial('/dev/ttyS0',115200)
 power_key = 6

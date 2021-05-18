@@ -3,7 +3,7 @@
 # will then write data to CSV file where it will be sent to email at end of work day
 # this was created by UD-GPS team. All rights resevered University Of Dayton, 11/5/2020
 
-import globals
+from globals import *
 import tkinter as tk
 import csv
 import datetime
@@ -11,6 +11,7 @@ from os import path
 import configparser
 from sys import platform
 from DBComm import *
+import config
 
 ############################################################################
 ############################################################################
@@ -23,7 +24,7 @@ t = date.strftime("%m-%d-%y")
 
 ############################################################################
 ############################################################################
-
+'''
 #Config File Setup
 config = configparser.ConfigParser()
 #detects if a config file exists and creates one if it doesn't
@@ -52,7 +53,7 @@ globals.database = "udbus"
 BusID = config.get("Basic Settings","BusID")
 ############################################################################
 ############################################################################
-
+'''
 fields = ['Getting on', 'Getting Off', 'Left at Stop', 'Bus Stop']
 ans = []
 my_file = path.exists("Data " + t + '.csv')
@@ -169,6 +170,6 @@ if __name__ == '__main__':
     b1.pack(side=tk.LEFT, padx=5, pady=5)
     b2 = tk.Button(row3, text='Quit', command=root.destroy)
     b2.pack(side=tk.LEFT, padx=5, pady=5)
-    if config["Basic Settings"].getboolean("Fullscreen"):
+    if Fullscreen:
         root.attributes('-fullscreen',True)
     root.mainloop()
