@@ -11,7 +11,7 @@ from os import path
 import configparser
 from sys import platform
 from DBComm import *
-import config
+import Config
 
 ############################################################################
 ############################################################################
